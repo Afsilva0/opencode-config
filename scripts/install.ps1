@@ -3,7 +3,7 @@
 # Requisitos: git instalado y OpenCode instalado
 
 param(
-    [string]$RepoUrl = "<url-del-repositorio>",
+    [string]$RepoUrl = "https://github.com/Afsilva0/opencode-config.git",
     [string]$CloneDir = "$env:USERPROFILE\opencode-config",
     [string]$OpenCodeDir = "$env:USERPROFILE\.opencode"
 )
