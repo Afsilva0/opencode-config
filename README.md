@@ -11,7 +11,10 @@ opencode-config/
 ├── README.md              # Este archivo
 ├── .gitattributes         # Normalización de finales de línea
 └── agents/
+    ├── architect.md       # Arquitecto de software: estructura y patrones de diseño
     ├── docs.md            # Agente de documentación técnica
+    ├── implementer.md     # Implementa código exactamente según lo solicitado
+    ├── refactor.md        # Refactorización segura: solo lo que el usuario indique
     ├── reviewer.md        # Agente de revisión de código
     └── tester.md          # Agente de diseño y ejecución de pruebas
 ```
@@ -22,11 +25,14 @@ Los agentes viven en la carpeta `agents/` y se definen con metadatos YAML al ini
 
 | Agente | Descripción | Modo | Permisos destacados |
 |--------|-------------|------|---------------------|
+| `architect` | Define estructura de carpetas, patrones de diseño, interfaces y límites de responsabilidad antes de escribir código | subagent | `read`, `glob`, `grep`, `list` |
 | `docs` | Especialista en documentación técnica, README, APIs y explicación de código | subagent | `read`, `glob`, `grep`, `list` |
+| `implementer` | Implementa código nuevo exactamente según lo que el usuario indique, revisando antes qué hacen los otros agentes | subagent | `read`, `glob`, `grep`, `list`, `edit` (bajo solicitud) |
+| `refactor` | Refactoriza código de forma segura, solo modificando lo que el usuario indique explícitamente | subagent | `read`, `glob`, `grep`, `list`, `edit` (bajo solicitud) |
 | `reviewer` | Revisa código en busca de errores, riesgos de seguridad y problemas de mantenibilidad | subagent | `read`, `glob`, `grep`, `list` |
 | `tester` | Diseña y ejecuta pruebas para comprobar el comportamiento del software | subagent | `read`, `glob`, `grep`, `list`, `bash` (bajo solicitud) |
 
-Ninguno de estos agentes puede modificar archivos ni ejecutar comandos de forma destructiva sin autorización explícita.
+Los agentes `architect`, `docs` y `reviewer` son de solo lectura. Los agentes `implementer` y `refactor` requieren tu aprobación explícita (`edit: ask`) antes de modificar cualquier archivo. El agente `tester` puede ejecutar comandos solo bajo solicitud (`bash: ask`).
 
 ## Configuración de OpenCode (`opencode.json`)
 
@@ -117,7 +123,7 @@ Cierra y vuelve a abrir OpenCode para que cargue `opencode.json`, los agentes pe
 ### 5. Verificación
 
 - Abre OpenCode y confirma que el agente por defecto es `plan`.
-- Verifica que aparecen los agentes `docs`, `reviewer` y `tester` en el selectorio de agentes.
+- Verifica que aparecen los agentes `architect`, `docs`, `implementer`, `refactor`, `reviewer` y `tester` en el selectorio de agentes.
 - Revisa que los permisos coincidan con lo definido en `opencode.json` (`read: allow`, resto `ask`).
 
 ### Versiones probadas
