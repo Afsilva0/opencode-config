@@ -1,0 +1,19 @@
+# Secretos y archivos de entorno
+.env
+.env.*
+*.secret
+secrets.json
+*.key
+*.pem
+id_*
+id_*.*
+*.log
+
+# Datos locales y caché de OpenCode
+.opencode/
+.agent-data/
+.cache/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

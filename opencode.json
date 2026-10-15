@@ -3,7 +3,7 @@
   "default_agent": "plan",
   "permission": {
     "*": "ask",
-    "read": "allow",
+    "read": "ask",
     "edit": "ask",
     "bash": "ask",
     "external_directory": "ask"
